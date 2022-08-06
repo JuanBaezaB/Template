@@ -35,7 +35,10 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
         $users = User::all();
         return Inertia::render('User', compact('users'));
     })->name('user.index');*/
-    Route::resource('/dashboard/user', UserController::class);
+    Route::get('/dashboard/user', [UserController::class, 'index'])->name('user.index');
+    Route::post('/dashboard/user', [UserController::class, 'store'])->name('user.store');
+    Route::patch('/dashboard/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/dashboard/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 });
 
 //Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->resource('/dashboard/user', UserController::class);

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserPost;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -40,7 +43,8 @@ class UserController extends Controller
     {
 
         User::create($request->validate());
-        return Inertia::render('User/Create');
+        return redirect()->back()
+                    ->with('message', 'Article Created Successfully.');
     }
 
     /**
@@ -72,9 +76,26 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(request $request)
     {
-        //
+
+        Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($request->id)],
+            'password' => ['required', 'string', 'min:8'],
+        ])->validate();
+
+
+        if ($request->has('id')) {
+            User::find($request->input('id'))->update([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+            ]);
+            return redirect()->back()
+                    ->with('message', 'Updated');
+        }
+
     }
 
     /**
@@ -83,8 +104,14 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function delete(Request $user)
     {
-        //
+        $user->has('id') ?
+            User::find($user->input('id'))->delete() :
+            redirect()->back()
+            ->with('errors', 'Somethings goes wrong.');
+
+        return redirect()->back()
+            ->with('message', 'Article deleted successfully.');
     }
 }
