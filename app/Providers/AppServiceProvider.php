@@ -30,9 +30,6 @@ class AppServiceProvider extends ServiceProvider
                 return Session::get('errors')
                     ? Session::get('errors')->getBag('default')->getMessages()
                     : (object) [];
-            },
-            'toast' => function(){
-                return Session::get('toast');
             }
         ]);
 
@@ -41,5 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 'message' => Session::get('message'),
             ];
         });
+
+
     }
 }

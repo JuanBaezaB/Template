@@ -36,8 +36,21 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+        if ($request->session()->has('errors')) {
+            $toast = [
+                'title'      => 'Check your details, and try again.',
+                'message'    => 'Revisa tus datos e intenta de nuevo.',
+                'type'       => 'warning',
+            ];
+        } else {
+            $toast = $request->session()->get('toast', null);
+        }
+
+        // don't forget all of your awesome Inertia response handling too
+
         return array_merge(parent::share($request), [
-            //
+            'toast' => $toast
         ]);
     }
 }

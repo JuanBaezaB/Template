@@ -8,6 +8,7 @@ import JetDropdown from '@/Jetstream/Dropdown.vue';
 import JetDropdownLink from '@/Jetstream/DropdownLink.vue';
 import JetNavLink from '@/Jetstream/NavLink.vue';
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue';
+import Toast from '../components/toast.vue';
 
 defineProps({
     title: String,
@@ -33,6 +34,8 @@ const logout = () => {
         <Head :title="title" />
 
         <JetBanner />
+
+        <Toast :toast="$page.props.toast" />
 
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">

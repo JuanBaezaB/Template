@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use App\Traits\AddsToast;
 
 class UserController extends Controller
 {
+    use AddsToast;
     /**
      * Display a listing of the resource.
      *
@@ -43,8 +45,8 @@ class UserController extends Controller
     {
 
         User::create($request->all());
-        return redirect()->back()
-                    ->with(['toast' => ['message' => 'Usuario creada con éxito.']]);
+        $this->addToast('Created', 'Usuario Creado con éxito', 'success');
+        return redirect()->back();
     }
 
     /**
@@ -111,7 +113,7 @@ class UserController extends Controller
             redirect()->back()
             ->with('errors', 'Somethings goes wrong.');
 
-        return redirect()->back()
-            ->with(['toast' => ['message' => 'Usuario eliminado con éxito.']]);
+        $this->addToast('Deleted', 'Usuario eliminado con éxito', 'success');
+        return redirect()->back();
     }
 }
