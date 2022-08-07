@@ -6,6 +6,8 @@
     import JetInput from '@/Jetstream/Input.vue';
     import JetLabel from '@/Jetstream/Label.vue';
     import JetButton from '@/Jetstream/Button.vue';
+    import Toast from '../../components/toast.vue';
+
 </script>
 
 <template>
@@ -15,6 +17,8 @@
                 Users
             </h2>
         </template>
+
+        <Toast :toast="$page.toast" />
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

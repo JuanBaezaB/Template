@@ -39,12 +39,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserPost $request)
+    public function store(Request $request)
     {
 
-        User::create($request->validate());
+        User::create($request->all());
         return redirect()->back()
-                    ->with('message', 'Article Created Successfully.');
+                    ->with(['toast' => ['message' => 'Usuario creada con éxito.']]);
     }
 
     /**
@@ -112,6 +112,6 @@ class UserController extends Controller
             ->with('errors', 'Somethings goes wrong.');
 
         return redirect()->back()
-            ->with('message', 'Article deleted successfully.');
+            ->with(['toast' => ['message' => 'Usuario eliminado con éxito.']]);
     }
 }

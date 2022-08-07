@@ -31,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
                     ? Session::get('errors')->getBag('default')->getMessages()
                     : (object) [];
             },
+            'toast' => function(){
+                return Session::get('toast');
+            }
         ]);
 
         Inertia::share('flash', function () {
