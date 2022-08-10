@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -39,6 +40,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
     Route::post('/dashboard/user', [UserController::class, 'store'])->name('user.store');
     Route::patch('/dashboard/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/dashboard/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
+
+    Route::get('/dashboard/branch', [BranchController::class, 'index'])->name('branch.index');
 });
 
 //Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->resource('/dashboard/user', UserController::class);

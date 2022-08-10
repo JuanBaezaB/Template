@@ -94,8 +94,9 @@ class UserController extends Controller
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
             ]);
-            return redirect()->back()
-                    ->with('message', 'Updated');
+
+            $this->addToast('Updated', 'Los datos del usuario han sido actualizados con éxito', 'success');
+            return redirect()->back();
         }
 
     }
