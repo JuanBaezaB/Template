@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
@@ -43,6 +44,9 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])
 
 
     Route::get('/dashboard/branch', [BranchController::class, 'index'])->name('branch.index');
+
+
+    Route::get('/dashboard/example', [ExampleController::class, 'index'])->name('example.index');
 });
 
 //Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->resource('/dashboard/user', UserController::class);

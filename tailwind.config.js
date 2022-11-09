@@ -12,9 +12,7 @@ module.exports = {
 
     theme: {
         extend: {
-            fontFamily: {
-                sans: 'Poppins',
-            },
+            fontFamily: { sans: ['Inter var'] },
         },
     },
 
